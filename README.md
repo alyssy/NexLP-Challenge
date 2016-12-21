@@ -41,16 +41,17 @@ To Run
 * the file can contain one email or multiple emails deliminated by ########NEXTEMAIL##########
 * output is a list of emotions followed by a newline then the line number of the ########NEXTEMAIL########## that directly follows the given email
 * example:
-> INPUT:  
-> Thanks for your consideration.  I look forward to hearing from you tomorrow.   
-> 
-> Sherri :-)  
-> ########NEXTEMAIL##########  
-> Attached is the weekly status report regarding ENA Litigation.  
->
-> OUTPUT:  
-> appreciative  
-> 4  
+``` INPUT:  
+Thanks for your consideration.  I look forward to hearing from you tomorrow.   
+ 
+Sherri :-)  
+########NEXTEMAIL##########  
+Attached is the weekly status report regarding ENA Litigation.  
+
+OUTPUT:  
+appreciative  
+4 
+```
 * if there is no emotion in the email, nothing is printed and the algorithm continues
 
 
