@@ -316,54 +316,66 @@ noword = 0
 linenumber = 0
 previous_word = ""
 
-our_file = sys.argv[1] #'file_1.txt'
+if (len(sys.argv) != 2):
+	print "Usage:"
+	print "python NexLP.py [arg1]"
+	print "	[arg1]: input file containing emails"
+	exit()
+
+our_file = sys.argv[1]
 
 # read the file
-f = open(our_file, 'r')
-for line in f:
-    linenumber = linenumber + 1
-    if '########NEXTEMAIL##########' in line:
-        if (return_greatest(happy, sad, angry, irritated, appreciative) != 0):
-            print linenumber
-        happy = 0
-        sad = 0
-        angry = 0
-        irritated = 0
-        appreciative = 0
-        noword = 0
-        previous_word = ""
-        
-    line = line.translate(string.maketrans("",""), string.punctuation)
-    for word in line.split():
-        word = word.lower()
-        #print word
-        try:
-            if (word in ID.keys()):
-                if (ID[word] >= 1000 and ID[word] < 2000):
-                    happy = happy + 1
-                elif (ID[word] >= 2000 and ID[word] < 3000):
-                    sad = sad + 1
-                elif (ID[word] >= 3000 and ID[word] < 4000):
-                    angry = angry + 1
-                elif (ID[word] >= 4000 and ID[word] < 5000):
-                    irritated = irritated + 1
-                elif (ID[word] >= 5000 and ID[word] < 6000):
-                    appreciative = appreciative + 1
-                elif (ID[previous_word + "" + word] >= 1000 and ID[previous_word + "" + word] < 2000):
-                    happy = happy + 1
-                elif (ID[previous_word + "" + word] >= 2000 and ID[previous_word + "" + word] < 3000):
-                    sad = sad + 1
-                elif (ID[previous_word + "" + word] >= 3000 and ID[previous_word + "" + word] < 4000):
-                    angry = angry + 1
-                elif (ID[previous_word + "" + word] >= 4000 and ID[previous_word + "" + word] < 5000):
-                    appreciative = appreciative + 1
-            else:
-                noword = noword + 1
-            
-            previous_word = word
-        except ValueError:
-            continue
-        
+#f = open(our_file, 'r')
+try:
+	with open(our_file, 'r') as f:
+		for line in f:
+			linenumber = linenumber + 1
+			if '########NEXTEMAIL##########' in line:
+				if (return_greatest(happy, sad, angry, irritated, appreciative) != 0):
+					print linenumber
+				happy = 0
+				sad = 0
+				angry = 0
+				irritated = 0
+				appreciative = 0
+				noword = 0
+				previous_word = ""
+				
+			line = line.translate(string.maketrans("",""), string.punctuation)
+			for word in line.split():
+				word = word.lower()
+				#print word
+				try:
+					if (word in ID.keys()):
+						if (ID[word] >= 1000 and ID[word] < 2000):
+							happy = happy + 1
+						elif (ID[word] >= 2000 and ID[word] < 3000):
+							sad = sad + 1
+						elif (ID[word] >= 3000 and ID[word] < 4000):
+							angry = angry + 1
+						elif (ID[word] >= 4000 and ID[word] < 5000):
+							irritated = irritated + 1
+						elif (ID[word] >= 5000 and ID[word] < 6000):
+							appreciative = appreciative + 1
+						elif (ID[previous_word + "" + word] >= 1000 and ID[previous_word + "" + word] < 2000):
+							happy = happy + 1
+						elif (ID[previous_word + "" + word] >= 2000 and ID[previous_word + "" + word] < 3000):
+							sad = sad + 1
+						elif (ID[previous_word + "" + word] >= 3000 and ID[previous_word + "" + word] < 4000):
+							angry = angry + 1
+						elif (ID[previous_word + "" + word] >= 4000 and ID[previous_word + "" + word] < 5000):
+							appreciative = appreciative + 1
+					else:
+						noword = noword + 1
+					
+					previous_word = word
+				except ValueError:
+					continue
+except IOError as e:
+	print "File does not exist! Please try again with the correct file."
+except:
+	print "Unexpected error:", sys.exc_info()[0]
+
 return_greatest(happy, sad, angry, irritated, appreciative)
             
 
