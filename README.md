@@ -35,24 +35,25 @@ Implementation
 
 To Run
 ---------------------------
-* from the command line:  
-	python emotion-detector/core.py input_file.txt  
-	OR python NexLP.py input_file.txt [deprecated]  
-* the file can contain one email or multiple emails deliminated by ########NEXTEMAIL##########
-* output is a list of emotions followed by a newline then the line number of the ########NEXTEMAIL########## that directly follows the given email
-* example:
-``` INPUT:  
-Thanks for your consideration.  I look forward to hearing from you tomorrow.   
- 
-Sherri :-)  
-########NEXTEMAIL##########  
-Attached is the weekly status report regarding ENA Litigation.  
+* From the command line:
+	`python NexLP.py file_1.txt`
+* The file can contain one email or multiple emails deliminated by ########NEXTEMAIL##########
+* Output is a list of emotions followed by a newline then the line number of the ########NEXTEMAIL########## that directly follows the given email
+* If there is no emotion in the email, nothing is printed and the algorithm continues
 
-OUTPUT:  
-appreciative  
-4 
-```
-* if there is no emotion in the email, nothing is printed and the algorithm continues
+Example
+---------------------------
+	INPUT:
+	Thanks for your consideration.  I look forward to hearing from you tomorrow...
+
+	Sherri :-)
+	########NEXTEMAIL##########
+	Attached is the weekly status report regarding ENA Litigation.
+
+	OUTPUT:
+	appreciative
+	4
+
 
 
 Limitations and Future Additions
@@ -60,6 +61,3 @@ Limitations and Future Additions
 * This tool does not detect sarcasm! Many humans can't detect sarcasm, so we figured this tool shouldn't either :P
 * As mentioned above, the best areas for improvement would be extending the following features: tracking longer phrases, tracking more emotions, tracking more targeted words/phrases, storing more words/phrases
 * Another area of improvement would be implementing the core functionality of the tool in the form of a static lookup table rather than a dynamically created hash table
-
-
-
